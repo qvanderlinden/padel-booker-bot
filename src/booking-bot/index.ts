@@ -43,6 +43,16 @@ const main = async () => {
 		}
 		await loginForm.evaluate(form => (form as HTMLFormElement).submit())
 
+		// wait 
+		await page.waitForNavigation()
+
+		// go to calendar
+		const calendarButton = await page.$("[calendar=calendar]")
+		if (!calendarButton) {
+			throw new Error("Cannot find calendar button in side menu")
+		}
+		await calendarButton.click()
+
 	} catch (e) {
 		notify(e)
 	}
